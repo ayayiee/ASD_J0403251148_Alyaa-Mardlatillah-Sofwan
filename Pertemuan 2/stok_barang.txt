@@ -1,0 +1,12 @@
+BRG001,  Susu, 7
+BRG002,  Roti, 56
+BRG003,  Wafer, 10
+BRG004,  Permen, 3
+BRG005,  Mie Instan, 28
+BRG006,  Sereal, 65
+BRG007,  Pudding, 25
+BRG008,  Cokelat, 20
+BRG009,  Gula pasir, 50
+BRG010,  Abon, 25
+BRG011,  Cream puff, 35
+BRG012, Potabee, 33
