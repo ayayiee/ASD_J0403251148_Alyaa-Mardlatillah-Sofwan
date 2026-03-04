@@ -43,7 +43,7 @@ selama syarat tertentu terpenuhi, yang sulit dilakukan dengan struktur
 for standar dalam konteks penyisipan ini.
 
 4. Operasi apa yang terjadi di dalam while?
-4. Operasi yang terjadi di dalam while adalah pergeseran (shifting).
+Operasi yang terjadi di dalam while adalah pergeseran (shifting).
 Selama elemen di sebelah kiri (data[j]) lebih besar daripada key, algoritma 
 akan menyalin atau menggeser elemen tersebut satu posisi ke kanan (data[j + 1] = data[j]). 
 Ini dilakukan untuk "membuka ruang" agar key nantinya bisa disisipkan di posisi yang tepat.
