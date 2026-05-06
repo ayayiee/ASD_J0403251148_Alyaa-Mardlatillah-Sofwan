@@ -1,0 +1,88 @@
+# ==============================================
+# Nama  : Alyaa Mardlatillah Sofwan
+# NIM   : J0403251148
+# Kelas : TPL B-1
+# Praktikum 12 - Graph II: Shortest Path
+# Latihan 2: Implementasi Dijkstra 
+# ===============================================
+
+import heapq 
+# Weighted graph dengan bobot positif 
+graph = { 
+    'A': {'B': 4, 'C': 2}, 
+    'B': {'D': 5}, 
+    'C': {'D': 1}, 
+    'D': {} 
+} 
+
+def dijkstra(graph, start): 
+    '''
+    Fungsi untuk mencari jarak terpendek dari node start 
+    ke seluruh node lain menggunakan algoritma Dijkstra. 
+    '''
+
+    # Semua jarak awal dibuat tak hingga 
+    distances = {node: float('inf') for node in graph}
+
+    # Jarak dari start ke start adalah 0 
+    distances[start] = 0 
+
+    # Priority queue menyimpan pasangan (jarak, node) 
+    priority_queue = [(0, start)]
+
+    while priority_queue: 
+            current_distance, current_node = heapq.heappop(priority_queue) 
+    
+            # Jika jarak saat ini lebih besar dari jarak yang sudah tercatat, 
+            # maka proses dilewati 
+            if current_distance > distances[current_node]: 
+                continue 
+    
+            # Periksa semua tetangga dari node saat ini 
+            for neighbor, weight in graph[current_node].items(): 
+                distance = current_distance + weight 
+    
+                # Jika ditemukan jarak yang lebih kecil, perbarui jaraknya 
+                if distance < distances[neighbor]: 
+                    distances[neighbor] = distance 
+                    heapq.heappush(priority_queue, (distance, neighbor)) 
+    
+    return distances 
+ 
+ 
+hasil = dijkstra(graph, 'A') 
+ 
+print("Jarak terpendek dari node A:") 
+for node, distance in hasil.items(): 
+    print(node, "=", distance)
+
+'''
+# Jawaban:
+# 1. Jarak terpendek dari A ke B = 4
+#    Karena hanya ada satu jalur langsung dari A ke B dengan bobot 4, maka itulah jarak terpendeknya.
+#
+# 2. Jarak terpendek dari A ke C = 2
+#    Sama seperti sebelumnya, terdapat jalur langsung dari A ke C dengan bobot 2, sehingga jarak terpendeknya adalah 2.
+#
+# 3. Jarak terpendek dari A ke D = 3
+#    Ada dua kemungkinan jalur:
+#    1) A -> B -> D = 4 + 5 = 9
+#    2) A -> C -> D = 2 + 1 = 3
+#    Algoritma Dijkstra akan memilih jalur dengan total bobot paling kecil, yaitu melalui C dengan hasil 3.
+#
+# 4. Jarak A ke D lebih kecil melalui C dibandingkan melalui B karena total bobotnya lebih kecil.
+#    Meskipun kedua jalur memiliki jumlah langkah/edge yang sama (2 langkah),
+#    nilai bobot tiap edge berbeda. Jalur melalui C memiliki bobot yang lebih kecil,
+#    sehingga menghasilkan total jarak yang lebih kecil.
+#
+# 5. Fungsi 'priority_queue' dalam algoritma Dijkstra adalah untuk menyimpan node-node yang akan diproses,
+#    dengan prioritas berdasarkan jarak terkecil sementara.
+#    Artinya, node dengan jarak paling kecil akan diproses terlebih dahulu (konsep greedy).
+#    Hal ini membuat algoritma lebih efisien karena selalu mengeksplorasi jalur terbaik lebih dulu.
+#
+# 6. Dijkstra tidak cocok untuk graph dengan bobot negatif karena algoritma ini mengasumsikan bahwa
+#    jika suatu node sudah mendapatkan jarak terpendek, maka jarak tersebut tidak akan berubah lagi.
+#    Namun, jika ada bobot negatif, bisa saja ditemukan jalur yang lebih pendek setelahnya,
+#    sehingga hasil yang sebelumnya dianggap "terpendek" menjadi salah.
+#    Oleh karena itu, untuk graph dengan bobot negatif biasanya digunakan algoritma lain seperti Bellman-Ford.
+'''
